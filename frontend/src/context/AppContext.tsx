@@ -13,9 +13,13 @@ import toast, { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { get } from "http";
 
-export const user_service = "http://localhost:5000";
-export const author_service = "http://localhost:5001";
-export const blog_service = "http://localhost:5002";
+export const user_service = "https://user-service-yi49.onrender.com";
+export const author_service ="https://author-service-e8vf.onrender.com";
+export const blog_service = "https://blog-service-6hwi.onrender.com";
+
+// export const user_service = "https://user-service-yi49.onrender.com";
+// export const author_service = "http://localhost:5001";
+// export const blog_service = "https://blog-service-6hwi.onrender.com";
 
 export const blogCategories = [
   "Techonlogy",
