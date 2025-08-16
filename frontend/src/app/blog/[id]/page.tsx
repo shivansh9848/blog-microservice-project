@@ -42,6 +42,7 @@ const BlogPage = () => {
   const [author, setAuthor] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
 
+  
   const [comments, setComments] = useState<Comment[]>([]);
 
   async function fetchComment() {
