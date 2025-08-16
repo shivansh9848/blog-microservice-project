@@ -1,4 +1,4 @@
 .txt
 blog.pem
 .env
-.docker-compose.yml
+docker-compose.yml
