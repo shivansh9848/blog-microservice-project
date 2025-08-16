@@ -52,13 +52,16 @@ services:
   frontend:
     build: ./frontend
     container_name: frontend
-    environment:
-      - NEXT_PUBLIC_USER_SERVICE=http://localhost:5000
-      - NEXT_PUBLIC_AUTHOR_SERVICE=http://localhost:5001
-      - NEXT_PUBLIC_BLOG_SERVICE=http://localhost:5002
+    env_file:
+      - ./frontend/.env.docker
+    # environment:
+    #   NEXT_PUBLIC_USER_SERVICE: http://user-service:5000
+    #   NEXT_PUBLIC_AUTHOR_SERVICE: http://author-service:5001
+    #   NEXT_PUBLIC_BLOG_SERVICE: http://blog-service:5002
     ports:
       - "3000:3000"
     depends_on:
       - user-service
       - author-service
       - blog-service
+
