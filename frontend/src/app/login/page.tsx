@@ -13,13 +13,16 @@ import { useAppData, user_service } from "@/context/AppContext";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useGoogleLogin } from "@react-oauth/google";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Loading from "@/components/loading";
 
 const LoginPage = () => {
   const { isAuth, setIsAuth, loading, setLoading, setUser } = useAppData();
-
-  if (isAuth) return redirect("/blogs");
+  const router = useRouter();
+  // Client-side redirect to avoid using redirect() in a client component
+  React.useEffect(() => {
+    if (isAuth) router.replace("/blogs");
+  }, [isAuth, router]);
 
   const responseGoogle = async (authResult: any) => {
     setLoading(true);
@@ -30,7 +33,7 @@ const LoginPage = () => {
 
       Cookies.set("token", result.data.token, {
         expires: 5,
-        secure: true,
+        secure: typeof window !== "undefined" && window.location.protocol === "https:",
         path: "/",
       });
       toast.success(result.data.message);

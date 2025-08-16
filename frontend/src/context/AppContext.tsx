@@ -92,6 +92,10 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     async function fetchUser() {
         try {
             const token = Cookies.get("token");
+            if (!token) {
+                setLoading(false);
+                return;
+            }
 
             const { data } = await axios.get(`${user_service}/api/v1/me`, {
                 headers: {
@@ -133,6 +137,10 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
     async function getSavedBlogs() {
         const token = Cookies.get("token");
+        if (!token) {
+            // Not logged in; nothing to fetch yet
+            return;
+        }
         try {
             const { data } = await axios.get(
                 `${blog_service}/api/v1/blog/saved/all`,

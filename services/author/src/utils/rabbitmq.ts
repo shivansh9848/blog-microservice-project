@@ -4,22 +4,15 @@ let channel: amqp.Channel;
 
 export const connectRabbitMQ = async () => {
   try {
-    const connection = await amqp.connect({
-      protocol: "amqp",
-      hostname: process.env.Rabbimq_Host,
-      port: 5672,
-      username: process.env.Rabbimq_Username,
-      password: process.env.Rabbimq_Password,
-    });
+    const connection = await amqp.connect(process.env.RABBITMQ_URL!);
 
     channel = await connection.createChannel();
 
-    console.log("✅ Connected to Rabbitmq");
+    console.log("✅ Connected to RabbitMQ (CloudAMQP)");
   } catch (error) {
-    console.error("❌ Failed to connect to Rabbitmq", error);
+    console.error("❌ Failed to connect to RabbitMQ", error);
   }
 };
-
 export const publishToQueue = async (queueName: string, message: any) => {
   if (!channel) {
     console.error("Rabbitmq channel is not intialized");

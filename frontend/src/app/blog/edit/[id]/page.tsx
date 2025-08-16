@@ -115,8 +115,10 @@ const EditBlogPage = () => {
         }
       );
 
-      toast.success(data.message);
-      fetchBlogs();
+  toast.success(data.message);
+  await fetchBlogs();
+  // Navigate back to the blog detail page so users can see the update
+  router.push(`/blog/${id}`);
     } catch (error) {
       toast.error("Error while adding blog");
     } finally {
@@ -200,7 +202,7 @@ const EditBlogPage = () => {
                 tabIndex={1}
                 onBlur={(newContent) => {
                   setContent(newContent);
-                  setFormData({ ...formData, blogcontent: newContent });
+                  setFormData((prev) => ({ ...prev, blogcontent: newContent }));
                 }}
               />
             </div>

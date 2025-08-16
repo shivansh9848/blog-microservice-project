@@ -10,7 +10,14 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+    cors({
+        origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
+        credentials: true,
+        methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
 
 const port = process.env.PORT;
 
@@ -43,6 +50,7 @@ redisClient
     .then(() => console.log("Connected to redis"))
     .catch(console.error);
 
+    
 // Keep the connection warm to avoid provider idle disconnects
 const PING_INTERVAL_MS = 30000; // 30s
 let pingTimer: NodeJS.Timeout | null = null;
