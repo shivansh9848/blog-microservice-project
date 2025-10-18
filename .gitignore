@@ -2,3 +2,5 @@
 blog.pem
 .env
 docker-compose.yml
+.github
+image
