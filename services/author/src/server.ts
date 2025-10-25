@@ -28,7 +28,7 @@ app.use(
 
 connectRabbitMQ();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 5001;
 
 async function initDB() {
   try {
